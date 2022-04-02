@@ -2,7 +2,7 @@ package geek.com;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        int[] array = {9, 7,7,7,7,7,1,1,1, 6, 1, 3, 3,7};
+        int[] array = {9, 7, 7, 7, 7, 7, 1, 1, 1, 6, 1, 3, 3, 7, 5, 7, 89, 9, 43, 312, 35, 67, 234, 324, 6643, 5341, 1, 122, 2, 1, 1, 1};
         sort(array);
         for (Integer integer : array) {
             System.out.print(integer + " ");
@@ -15,7 +15,7 @@ public class SelectionSort {
             int min = i;
             int max = lastPos - i;
 
-            for (int j = i; j < arr.length - i - 1; j++) {
+            for (int j = i; j < arr.length - i; j++) {
                 if (arr[j] < arr[min]) {
                     min = j;
                 }
@@ -30,8 +30,6 @@ public class SelectionSort {
             } else {
                 swap(arr, lastPos - i, max);
             }
-
-
         }
     }
 
