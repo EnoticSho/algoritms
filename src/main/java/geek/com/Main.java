@@ -1,15 +1,19 @@
 package geek.com;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Notebook[] notebooks = new Notebook[10000];
-        for (int i = 0; i < notebooks.length; i++) {
-            notebooks[i] = new Notebook();
+        List<Notebook> notebooks = new ArrayList<>(10000);
+        for (int i = 0; i < 10000; i++) {
+            notebooks.add(new Notebook());
         }
-        for (Notebook a : notebooks) {
 
+        notebooks.sort(new CompByPriceMemoryName());
+
+        for (Notebook a : notebooks) {
             System.out.println(a.getPrice() + " " + a.getMemory() + " " + a.getName());
         }
     }

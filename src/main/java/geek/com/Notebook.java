@@ -1,6 +1,8 @@
 package geek.com;
 
-public class Notebook {
+import java.util.Comparator;
+
+public class Notebook{
     private final int price;
     private final int memory;
     private final manufacturers name;
