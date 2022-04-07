@@ -23,20 +23,14 @@ public class Main {
     public static int search(int[] array) {
         int start = 0;
         int end = array.length - 1;
-        int op;
-        while (end > start) {
-            op = (start + end) / 2;
-            if (op == 0) {
-                break;
-            }
-            if (array[op] == op + 1) {
+        while (end >= start) {
+            int op = (start + end) / 2;
+            if (array[op] - op == 1) {
                 start = op + 1;
-            } else if (op + 2 == array[op] && op == array[op - 1]) {
-                return op + 1;
             } else {
                 end = op - 1;
             }
         }
-        return start + 1;
+        return start+1;
     }
 }
