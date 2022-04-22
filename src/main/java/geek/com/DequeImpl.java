@@ -3,7 +3,7 @@ package geek.com;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class DequeImpl<E> implements Deque<E> {
+public class DequeImpl<E> implements Deque<E>{
     private final E[] data;
     private int size;
     private int front;
@@ -21,13 +21,14 @@ public class DequeImpl<E> implements Deque<E> {
         if (isFull()) {
             return false;
         }
-        if (front == -1){
-            front++;
-            rear++;
-        }else if (front == 0){
-            front = size - 1;
-        }else front = front - 1;
+        if (front == -1) {
+            front = 0;
+            rear = 0;
+        } else if (front == 0) {
+            front = data.length - 1;
+        } else front = front - 1;
         data[front] = value;
+        size++;
         return true;
     }
 
@@ -36,33 +37,59 @@ public class DequeImpl<E> implements Deque<E> {
         if (isFull()) {
             return false;
         }
-
+        if (front == -1) {
+            rear = 0;
+            front = 0;
+        } else if (rear == data.length - 1) {
+            rear = 0;
+        } else rear = rear + 1;
+        data[rear] = value;
+        size++;
         return true;
     }
 
     @Override
     public E removeLeft() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        E value = data[front];
+        data[front++] = null;
+        if (front == data.length) {
+            front = 0;
+        }
+        size--;
+        return value;
     }
 
     @Override
     public E removeRight() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        E value = data[rear];
+        data[rear--] = null;
+        if (rear == 0) {
+            rear = data.length - 1;
+        }
+        size--;
+        return value;
     }
 
     @Override
-    public boolean insert(E value) {
-        return false;
+    public E peekLeft() {
+        if (isEmpty()) {
+            return null;
+        }
+        return data[front];
     }
 
     @Override
-    public E remove() {
-        return null;
-    }
-
-    @Override
-    public E peekFront() {
-        return null;
+    public E peekRight() {
+        if (isEmpty()) {
+            return null;
+        }
+        return data[rear];
     }
 
     @Override
