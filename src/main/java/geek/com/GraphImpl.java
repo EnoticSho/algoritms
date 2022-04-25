@@ -6,13 +6,12 @@ public class GraphImpl implements Graph {
     private final List<Vertex> vertexList;
     private final Integer[][] adjMatrix;
     private static int minDistance;
-    private final List<Vertex> vertexListMinDistance;
-    private Map<Integer, List<Vertex>> map = new TreeMap<>();
+    String string = "";
+    Map<Integer, String> map = new TreeMap<>();
 
     public GraphImpl(int maxVertexCount) {
         this.vertexList = new ArrayList<>(maxVertexCount);
         this.adjMatrix = new Integer[maxVertexCount][maxVertexCount];
-        this.vertexListMinDistance = new ArrayList<>();
     }
 
     @Override
@@ -88,16 +87,15 @@ public class GraphImpl implements Graph {
             vertex = getNearUnvisitedVertex(stack.peek());
             if (vertex == null || vertex.equals(vertex1)) {
                 stack.pop();
-                if (minDistance != 0){
-                    vertexListMinDistance.add(vertex1);
-                    map.put(minDistance, vertexListMinDistance);
-                    System.out.println(map);
+                if (minDistance != 0) {
+                    string = string.concat(vertex1.toString());
+                    map.put(minDistance, string);
                 }
             } else {
                 visitVertex(stack, vertex);
             }
         }
-
+        System.out.println(map.get(map.keySet().toArray()[0]) + " Расстояние " + map.keySet().toArray()[0]);
     }
 
     public Vertex getNearUnvisitedVertex(Vertex vertex) {
@@ -105,15 +103,11 @@ public class GraphImpl implements Graph {
         for (int i = 0; i < getSize(); i++) {
             if (adjMatrix[current][i] != null && !vertexList.get(i).isVisited()) {
                 minDistance += adjMatrix[current][i];
-                vertexListMinDistance.add(vertex);
+                string = string.concat(vertex.toString()).concat(" -> ");
                 return vertexList.get(i);
             }
         }
-        if (minDistance != 0) {
-            map.put(minDistance, vertexListMinDistance);
-        }
-
-        vertexListMinDistance.clear();
+        string = "";
         minDistance = 0;
         return null;
     }
